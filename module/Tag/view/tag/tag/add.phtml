@@ -1,0 +1,35 @@
+<?php
+$title = 'Add new Tag';
+$this->headTitle($title);
+?>
+    <h1><?= $this->escapeHtml($title) ?></h1>
+<?php
+// This provides a default CSS class and placeholder text for the title element:
+/** @var \Zend\Form\Form $tag */
+$tag = $this->form->get('tag')->get('title');
+$tag->setAttribute('class', 'form-control');
+$tag->setAttribute('placeholder', 'Tag title');
+
+
+// This provides CSS classes for the submit button:
+/** @var \Zend\Form\Form $submit */
+$submit = $this->form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+
+$this->form->setAttribute('action', $this->url('tags', ['action' => 'add']));
+$this->form->prepare();
+
+echo $this->form()->openTag($this->form);
+?>
+<?php // Wrap the elements in divs marked as form groups, and render the
+// label, element, and errors separately within ?>
+    <div class="form-group">
+        <?= $this->formLabel($tag) ?>
+        <?= $this->formElement($tag) ?>
+        <?= $this->formElementErrors()->render($tag, ['class' => 'help-block']) ?>
+    </div>
+
+<?php
+echo $this->formSubmit($submit);
+echo $this->formHidden($this->form->get('tag')->get('id'));
+echo $this->form()->closeTag();

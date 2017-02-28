@@ -1,0 +1,27 @@
+<?php
+$title = 'My Producers';
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<p>
+    <a href="<?= $this->url('producers', ['action' => 'add']) ?>">Add new Producers</a>
+</p>
+
+<table class="table">
+    <tr>
+        <th>Last Name</th>
+        <th>First Name</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php foreach ($this->producers as $prod) : ?>
+        <?php /** @var \Producer\Model\Producer $prod */ ?>
+        <tr>
+            <td><?= $this->escapeHtml($prod->getLastName()) ?></td>
+            <td><?= $this->escapeHtml($prod->getFirstName()) ?></td>
+            <td>
+                <a href="<?= $this->url('producers', ['action' => 'edit', 'id' => $prod->getId()]) ?>">Edit</a>
+                <a href="<?= $this->url('producers', ['action' => 'delete', 'id' => $prod->getId()]) ?>">Delete</a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>

@@ -1,0 +1,25 @@
+<?php
+$title = 'My tags';
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<p>
+    <a href="<?= $this->url('tags', ['action' => 'add']) ?>">Add new tag</a>
+</p>
+
+<table class="table">
+    <tr>
+        <th>Tag</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php foreach ($this->tags as $tag) : ?>
+        <?php /** @var \Tag\Model\Tag $tag */ ?>
+        <tr>
+            <td><?= $this->escapeHtml($tag->getLabel()) ?></td>
+            <td>
+                <a href="<?= $this->url('tags', ['action' => 'edit', 'id' => $tag->getId()]) ?>">Edit</a>
+                <a href="<?= $this->url('tags', ['action' => 'delete', 'id' => $tag->getId()]) ?>">Delete</a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>
